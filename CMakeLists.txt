@@ -1,0 +1,92 @@
+cmake_minimum_required(VERSION 3.8)
+project(nnlib)
+
+set(CMAKE_CXX_STANDARD 11)
+
+#set(GCC_COVERAGE_COMPILE_FLAGS "-framework Accelerate")
+#add_definitions(${GCC_COVERAGE_COMPILE_FLAGS})
+
+set(SOURCE_FILES
+        include/nnlib/core/error.hpp
+        include/nnlib/core/storage.hpp
+        include/nnlib/core/tensor.hpp
+        include/nnlib/critics/critic.hpp
+        include/nnlib/critics/criticsequencer.hpp
+        include/nnlib/critics/mse.hpp
+        include/nnlib/critics/nll.hpp
+        include/nnlib/math/math.hpp
+        include/nnlib/math/math_base.hpp
+        include/nnlib/nn/batchnorm.hpp
+        include/nnlib/nn/concat.hpp
+        include/nnlib/nn/container.hpp
+        include/nnlib/nn/dropconnect.hpp
+        include/nnlib/nn/dropout.hpp
+        include/nnlib/nn/identity.hpp
+        include/nnlib/nn/linear.hpp
+        include/nnlib/nn/logistic.hpp
+        include/nnlib/nn/logsoftmax.hpp
+        include/nnlib/nn/lstm.hpp
+        include/nnlib/nn/map.hpp
+        include/nnlib/nn/module.hpp
+        include/nnlib/nn/relu.hpp
+        include/nnlib/nn/sequencer.hpp
+        include/nnlib/nn/sequential.hpp
+        include/nnlib/nn/sparselinear.hpp
+        include/nnlib/nn/tanh.hpp
+        include/nnlib/opt/adam.hpp
+        include/nnlib/opt/nadam.hpp
+        include/nnlib/opt/optimizer.hpp
+        include/nnlib/opt/rmsprop.hpp
+        include/nnlib/opt/sgd.hpp
+        include/nnlib/serialization/csvserializer.hpp
+        include/nnlib/serialization/factory.hpp
+        include/nnlib/serialization/jsonserializer.hpp
+        include/nnlib/serialization/parser.hpp
+        include/nnlib/serialization/serialized.hpp
+        include/nnlib/serialization/traits.hpp
+        include/nnlib/util/args.hpp
+        include/nnlib/util/batcher.hpp
+        include/nnlib/util/progress.hpp
+        include/nnlib/util/random.hpp
+        include/nnlib/util/tensor_util.hpp
+        include/nnlib/util/timer.hpp
+        include/nnlib.hpp
+        test/core/test_error.hpp
+        test/core/test_storage.hpp
+        test/core/test_tensor.hpp
+        test/critics/test_criticsequencer.hpp
+        test/critics/test_mse.hpp
+        test/critics/test_nll.hpp
+        test/math/test_math_base.hpp
+        test/nn/test_batchnorm.hpp
+        test/nn/test_concat.hpp
+        test/nn/test_container.hpp
+        test/nn/test_dropconnect.hpp
+        test/nn/test_dropout.hpp
+        test/nn/test_identity.hpp
+        test/nn/test_linear.hpp
+        test/nn/test_logistic.hpp
+        test/nn/test_logsoftmax.hpp
+        test/nn/test_lstm.hpp
+        test/nn/test_map.hpp
+        test/nn/test_module.hpp
+        test/nn/test_relu.hpp
+        test/nn/test_sequencer.hpp
+        test/nn/test_sequential.hpp
+        test/nn/test_sparselinear.hpp
+        test/nn/test_tanh.hpp
+        test/opt/test_adam.hpp
+        test/opt/test_nadam.hpp
+        test/opt/test_rmsprop.hpp
+        test/opt/test_sgd.hpp
+        test/serialization/test_csvserializer.hpp
+        test/serialization/test_jsonserializer.hpp
+        test/serialization/test_serialized.hpp
+        test/toy_problems/classification.hpp
+        test/toy_problems/timeseries.hpp
+        test/util/test_args.hpp
+        test/util/test_batcher.hpp
+        test/util/test_random.hpp
+        test/main.cpp)
+
+add_executable(nnlib ${SOURCE_FILES})

@@ -109,7 +109,7 @@ public:
 	/// This performs a deep copy of the data given in the parameter.
 	/// The constructed tensor is one-dimensional (a vector).
 	/// \param values A Storage containing the values to store in the new tensor.
-	Tensor(const Storage<T> &values) :
+	explicit Tensor(const Storage<T> &values) :
 		m_dims({ values.size() }),
 		m_strides({ 1 }),
 		m_offset(0),
@@ -179,7 +179,7 @@ public:
 	///
 	/// The new tensor shares the parameter's storage and copies the parameter's shape.
 	/// \param other The tensor with which to share storage and from which to copy shape.
-	Tensor(Tensor &&other) :
+	Tensor(Tensor &&other) noexcept :
 		m_dims(other.m_dims),
 		m_strides(other.m_strides),
 		m_offset(other.m_offset),
@@ -247,7 +247,7 @@ public:
 	/// This tensor will share the parameter's storage and copy the parameter's shape.
 	/// \param other The tensor with which to share storage and from which to copy shape.
 	/// \note This essentially performs a shallow copy.
-	Tensor &operator=(Tensor &&other)
+	Tensor &operator=(Tensor &&other) noexcept
 	{
 		m_dims			= other.m_dims;
 		m_strides		= other.m_strides;
@@ -283,7 +283,7 @@ public:
 	}
 	
 	/// Returns the number of tensors sharing data with this tensor, including this tensor.
-	size_t sharedCount() const
+	long sharedCount() const
 	{
 		return m_shared.use_count();
 	}
@@ -1450,7 +1450,7 @@ class TensorIterator : public std::iterator<std::forward_iterator_tag, T, std::p
 {
 using TT = typename std::remove_const<T>::type;
 public:
-	TensorIterator(const Tensor<TT> *tensor, bool end = false) :
+	explicit TensorIterator(const Tensor<TT> *tensor, bool end = false) :
 		m_tensor(const_cast<Tensor<TT> *>(tensor)),
 		m_indices(tensor->dims(), 0),
 		m_ptr(m_tensor->ptr())
